@@ -6,4 +6,3 @@ def random_user_id(length=6) -> str:
     gen = ''.join(choice(characters) for i in range(length))
     return gen
 
-print(random_user_id())

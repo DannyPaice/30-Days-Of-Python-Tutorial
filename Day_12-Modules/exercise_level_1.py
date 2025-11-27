@@ -19,4 +19,3 @@ def user_id_gen_by_user() -> str:
     return acc
 
 print(user_id_gen_by_user())
-    

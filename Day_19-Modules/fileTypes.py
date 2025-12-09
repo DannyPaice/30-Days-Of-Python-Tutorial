@@ -29,7 +29,7 @@ person_json = '''{
 
 import json
 
-#Changing JSON to Dictionary (loads)
+#Changing JSON to Dictionary (loads ~ string / load ~ file)
 person_json = '''{
     "name":"Asabeneh",
     "country":"Finland",
@@ -45,7 +45,7 @@ print(person_dct['name'])
 
 
 
-#Changing Disctionary to JSON (dumps)
+#Changing Dictionary to JSON (dumps)
 person = {
     "name": "Asabeneh",
     "country": "Finland",
@@ -68,6 +68,7 @@ person2 = {
 }
 with open("Day_19-Modules/example3.json", "w", encoding='utf-8') as f:
     json.dump(person2, f, ensure_ascii=False, indent=4)
+
 
 
 

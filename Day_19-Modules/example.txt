@@ -1,0 +1,2 @@
+This is an example of txt
+Line num 2 for demonstration purposes

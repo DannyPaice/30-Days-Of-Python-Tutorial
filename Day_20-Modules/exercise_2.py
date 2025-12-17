@@ -12,7 +12,7 @@ cats_api = 'https://api.thecatapi.com/v1/breeds'
 response = requests.get(cats_api)
 cat_list = response.json()
 
-def weight_conv(xs: str) -> int:
+def avg_conv(xs: str) -> float:
     '''
     converts weight 'x - y' into an a single int which is avg(x, y)
     '''
@@ -20,9 +20,9 @@ def weight_conv(xs: str) -> int:
     nums = [int(sliced_str[0]), int(sliced_str[2])]
     return (nums[0] + nums[1]) / 2
 
-def num_list_conv(cat_list) -> int:
+def num_list_conv(cat_list) -> list[float]:
     weight_string = [x['weight']['metric'] for x in cat_list]
-    return [weight_conv(x) for x in weight_string]
+    return [avg_conv(x) for x in weight_string]
 
 def weight_stats(xs: list) -> str:
     arr = np.array(xs)
@@ -31,11 +31,35 @@ def weight_stats(xs: list) -> str:
     mean_weight = np.average(arr)
     median_weight = np.median(arr)
     std_weight = np.std(arr)
-    return f'''    min: {min_weight}kg,
-    max: {max_weight}kg
-    mean: {mean_weight}kg
-    median: {median_weight}kg
-    std: {std_weight}'''
+    return f'''--- Weight Statistics ---
+min: {min_weight:.2f}kg
+max: {max_weight:.2f}kg
+mean: {mean_weight:.2f}kg
+median: {median_weight:.2f}kg
+std: {std_weight:.2f}
+-------------------------'''
 
 cat_list_weights = num_list_conv(cat_list)
 print(weight_stats(cat_list_weights))
+
+def lifespan_list_conv(cat_list) -> list[float]:
+    lifespan_string = [x['life_span'] for x in cat_list]
+    return [avg_conv(x) for x in lifespan_string]
+
+def lifespan_stats(xs: list) -> str:
+    arr = np.array(xs)
+    min_year = np.min(arr)
+    max_year = np.max(arr)
+    mean_year = np.average(arr)
+    median_year = np.median(arr)
+    std = np.std(arr)
+    return f'''-- Life-span Statistics --
+min: {min_year:.2f} years
+max: {max_year:.2f} years
+mean: {mean_year:.2f} years
+median: {median_year:.2f} years
+std: {std:.2f}
+--------------------------'''
+
+cat_list_lifeSpans = num_list_conv(cat_list)
+print(lifespan_stats(cat_list_lifeSpans))

@@ -8,6 +8,8 @@ Read the cats API and cats_api = 'https://api.thecatapi.com/v1/breeds' and find:
 
 import requests
 import numpy as np
+import pandas as pd
+
 cats_api = 'https://api.thecatapi.com/v1/breeds'
 response = requests.get(cats_api)
 cat_list = response.json()
@@ -39,8 +41,8 @@ median: {median_weight:.2f}kg
 std: {std_weight:.2f}
 -------------------------'''
 
-cat_list_weights = num_list_conv(cat_list)
-print(weight_stats(cat_list_weights))
+#cat_list_weights = num_list_conv(cat_list)
+#print(weight_stats(cat_list_weights))
 
 def lifespan_list_conv(cat_list) -> list[float]:
     lifespan_string = [x['life_span'] for x in cat_list]
@@ -61,5 +63,30 @@ median: {median_year:.2f} years
 std: {std:.2f}
 --------------------------'''
 
-cat_list_lifeSpans = num_list_conv(cat_list)
-print(lifespan_stats(cat_list_lifeSpans))
+#cat_list_lifeSpans = num_list_conv(cat_list)
+#print(lifespan_stats(cat_list_lifeSpans))
+
+'''
+import pandas as pd
+data = pd.Series([1, 2, 5, 2, 3, 3, 3, 3, 4, 4, 5])
+# Create frequency table
+print(data.value_counts())
+'''
+
+def data_frame_dict(cat_list) -> dict:
+    
+    country_list = [x['origin'] for x in cat_list]
+    breed_list = [x['name'] for x in cat_list]
+    
+    return {
+        "country": country_list,
+        "breed": breed_list
+    }
+
+def frequency_table(xs: dict):
+    df = pd.DataFrame(xs)
+    frequency_table = pd.crosstab(df['country'], df['breed'])
+    return frequency_table
+
+print(frequency_table(data_frame_dict(cat_list)))
+

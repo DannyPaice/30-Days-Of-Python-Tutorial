@@ -31,13 +31,11 @@ def weight_stats(xs: list) -> str:
     mean_weight = np.average(arr)
     median_weight = np.median(arr)
     std_weight = np.std(arr)
-    return f'''
-    min: {min_weight}kg,
+    return f'''    min: {min_weight}kg,
     max: {max_weight}kg
     mean: {mean_weight}kg
     median: {median_weight}kg
-    std: {std_weight}
-    '''
+    std: {std_weight}'''
 
 cat_list_weights = num_list_conv(cat_list)
 print(weight_stats(cat_list_weights))

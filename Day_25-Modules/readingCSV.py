@@ -19,5 +19,5 @@ heights = df['Height']
 print(heights)
 
 
-# describe() method provides a descriptive statistical values of a dataset
+# describe() pd method provides a descriptive statistical values of a dataset
 print(heights.describe())
